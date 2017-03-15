@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="fruitVeg">
     <head>
         <title>Fruit and Veggies</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-        <script src="js/fruits_and_veggies_test.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+        <script src="js/fruits_and_veggies.js"></script>
         <script src="js/app.js"></script>
     </head>
-    <body>
+    <body ng-controller="mainCtrl">
         <div class="container">
             <h1>Fruit and Veggies</h1>
             <div class="row">
                 <div class="col-sm-4">
-                    col 1
+                    <h2 style="text-align: center">Fruits</h2>
+                    <div class="well"  ng-repeat="fruit in fruits track by $index"  ng-class="{'wrong':  fin &&  !findFruit($index) }">
+                      {{fruit}}
+                      <button ng-click="moveRight2Combo($index)" class="btn btn-primary"> &#8594 </button>
+                    </div>
                 </div>
                 <div class="col-sm-4">
-                    col 2
+                    <h2 style="text-align: center">Combo</h2>
+                    <h2 class="success" ng-show="Combo.length===0 && checkResult()" style="text-align: center">DOPE!</h2>  
+                    <h2 class="fail" ng-show="Combo.length===0 && !checkResult()" style="text-align: center">YOU FAIL AT LIFE!</h2> 
+                    <div class="well"  ng-repeat="item in Combo track by $index">
+                    <button ng-click="moveLeft($index)" class="btn btn-primary"> &#8592 </button>
+                    {{item}}
+                    <button ng-click="moveRight($index)" class="btn btn-primary"> &#8594 </button>
+                    </div>
                 </div>
                 <div class="col-sm-4">
-                    col 3
+                    <h2 style="text-align: center">Veggies</h2>
+                    <div class="well" ng-class="{'wrong': fin && !findVeggie($index) }" ng-repeat="veggie in veggies track by $index">
+                    <button ng-click="moveLeft2Combo($index)" class="btn btn-primary"> &#8592 </button>
+                    {{veggie}}
+                    </div>
                 </div>
             </div>
         </div>
